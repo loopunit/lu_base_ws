@@ -1,2 +1,2 @@
-# csharpmake_ws
+# lu_base_ws
 Workspace template for csharpmake

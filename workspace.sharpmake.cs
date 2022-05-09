@@ -5,11 +5,11 @@ using Sharpmake;
 //[module: Sharpmake.Include("organization/project/project.sharpmake.cs")]
 
 [Generate]
-public class sharpmake_workspace_solution : lu.common_solution
+public class lu_base_ws_solution : lu.common_solution
 {
-    public sharpmake_workspace_solution()
+    public lu_base_ws_solution()
     {
-        Name = "sharpmake_workspace";
+        Name = "lu_base_ws";
         AddDefaultTargets();
     }
 
@@ -25,6 +25,6 @@ public static class Main
     [Sharpmake.Main]
     public static void SharpmakeMain(Sharpmake.Arguments arguments)
     {
-        arguments.Generate<sharpmake_workspace_solution>();
+        arguments.Generate<lu_base_ws_solution>();
     }
 }
