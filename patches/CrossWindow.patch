@@ -1,0 +1,52 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index cc399fb..fb480fc 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -113,8 +113,7 @@ foreach(source IN LISTS FILE_SOURCES)
+ endforeach()
+ 
+ # Main files
+-file(GLOB_RECURSE MAIN_SOURCES RELATIVE
+-    ${CMAKE_HOME_DIRECTORY}
++file(GLOB_RECURSE MAIN_SOURCES
+     ${CMAKE_CURRENT_SOURCE_DIR}/src/CrossWindow/Main/${XWIN_API_PATH}Main.cpp
+     ${CMAKE_CURRENT_SOURCE_DIR}/src/CrossWindow/Main/${XWIN_API_PATH}Main.mm
+ )
+@@ -176,6 +175,24 @@ function(xwin_add_executable targetProject targetSources)
+ 
+ endfunction()
+ 
++foreach(source IN LISTS XMAIN_SOURCES)
++    source_group("" FILES "${source}")
++endforeach()
++set(XWIN_FILES "${XMAIN_SOURCES}" "${targetSources}")
++
++add_library(
++    ${PROJECT_NAME}Main
++    ${XWIN_FILES}
++)
++
++target_compile_definitions(${PROJECT_NAME}Main PRIVATE XWIN_${XWIN_API}=1)
++
++target_include_directories(${PROJECT_NAME}Main PUBLIC 
++    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
++	$<INSTALL_INTERFACE:include/CrossWindow-0.0.0>)
++
++target_link_libraries(${PROJECT_NAME}Main PUBLIC ${PROJECT_NAME})
++
+ # =============================================================
+ 
+ # Finalize Library
+@@ -184,7 +201,11 @@ add_library(
+     ${FILE_SOURCES}
+     )
+ 
+-target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/)
++#target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/)
++
++target_include_directories(${PROJECT_NAME} PUBLIC 
++    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
++	$<INSTALL_INTERFACE:include/CrossWindow-0.0.0>)
+ 
+ # =============================================================
+ 
