@@ -12,10 +12,37 @@ include(cmake/PackageProject.cmake)
 #
 
 CPMAddPackage(
+    NAME DirectX-Headers
+    GITHUB_REPOSITORY "microsoft/DirectX-Headers"
+    GIT_TAG "1a0c980fce8407ae5fced0a592cf56010770f7a7")
+
+packageProject(
+    NAME DirectX-Headers
+    VERSION 0.0.0
+    BINARY_DIR ${DirectX-Headers_BINARY_DIR}
+    INCLUDE_DIR ${DirectX-Headers_SOURCE_DIR}/include
+    INCLUDE_DESTINATION include
+    INCLUDE_HEADER_PATTERN "*.h"
+    COMPATIBILITY AnyNewerVersion
+    DISABLE_VERSION_SUFFIX YES)
+
+packageProject(
+    NAME DirectX-Guids
+    VERSION 0.0.0
+    BINARY_DIR ${DirectX-Headers_BINARY_DIR}
+    INCLUDE_DIR ${DirectX-Headers_SOURCE_DIR}/include
+    INCLUDE_DESTINATION include
+    # Disable since this is lib only
+    INCLUDE_HEADER_PATTERN "*.z"
+    COMPATIBILITY AnyNewerVersion
+    DISABLE_VERSION_SUFFIX YES)
+
+#
+
+CPMAddPackage(
     NAME CrossWindow
     GITHUB_REPOSITORY "alaingalvan/CrossWindow"
     GIT_TAG "3fb97e884ecf27a55adb68cec9def10516a48131"
-    EXCLUDE_FROM_ALL YES
     PATCH_COMMAND git apply ${CMAKE_CURRENT_SOURCE_DIR}/patches/CrossWindow.patch
     OPTIONS
         "XWIN_API ${LU_API}"
@@ -68,11 +95,11 @@ CPMAddPackage(
     GIT_TAG "dbe9930031541f6e9472e8f495cd295dc79ef89d"
     SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/dev/lu_base"
     OPTIONS 
-        "ENABLE_TESTING FALSE"
-    EXCLUDE_FROM_ALL YES)
+        "ENABLE_TESTING FALSE")
 
 packageProject(
     NAME lu_base
+    NAMESPACE loopunit
     VERSION 0.0.0
     BINARY_DIR ${lu_base_BINARY_DIR}
     INCLUDE_DIR ${lu_base_SOURCE_DIR}/include
@@ -91,12 +118,12 @@ endif()
 
 CPMAddPackage(
     NAME lu_main
+    NAMESPACE loopunit
     GITHUB_REPOSITORY "loopunit/lu_main"
     GIT_TAG "6918c9d351ab767aee8031f602bb3a3bd0f6ee6c"
     SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/dev/lu_main"
     OPTIONS 
-        "ENABLE_TESTING FALSE"
-    EXCLUDE_FROM_ALL YES)
+        "ENABLE_TESTING FALSE")
 
 packageProject(
     NAME lu_main
