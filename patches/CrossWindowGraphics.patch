@@ -1,0 +1,15 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 63477b3..16704fa 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -42,8 +42,8 @@ add_library(CrossWindowGraphics INTERFACE)
+ 
+ target_include_directories(
+   CrossWindowGraphics INTERFACE
+-  ${CMAKE_CURRENT_SOURCE_DIR}/src
+-)
++	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
++	$<INSTALL_INTERFACE:include/CrossWindow-Graphics-0.0.0>)
+ 
+ if(NOT( XGFX_API STREQUAL "NONE" ))
+     message( STATUS "Using the " ${XGFX_API_PATH} " graphics API with CrossWindow")

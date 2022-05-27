@@ -1,0 +1,24 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 52acebc1..28e96d01 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -10,8 +10,8 @@ option(VULKAN_SUPPORT "Vulkan Support" ON)
+ cmake_dependent_option(DIRECTX_SUPPORT "DirectX 12 Support" ON "WIN32" OFF)
+ cmake_dependent_option(AGILITY_SDK_REQUIRED "Use Agility SDK" OFF "WIN32" OFF)
+ cmake_dependent_option(METAL_SUPPORT "Metal Support" ON "APPLE" OFF)
+-cmake_dependent_option(BUILD_SAMPLES "Build samples" OFF "IOS_OR_TVOS" ON)
+-cmake_dependent_option(BUILD_UNIT_TESTS "Build unit tests" OFF "IOS_OR_TVOS" ON)
++cmake_dependent_option(BUILD_SAMPLES "Build samples" OFF "IOS_OR_TVOS" OFF)
++cmake_dependent_option(BUILD_UNIT_TESTS "Build unit tests" OFF "IOS_OR_TVOS" OFF)
+ 
+ set(project_root "${CMAKE_CURRENT_SOURCE_DIR}")
+ set(assets_path "${project_root}/assets/")
+@@ -31,7 +31,7 @@ include(3rdparty/mustache)
+ include(3rdparty/nowide)
+ include(3rdparty/catch2)
+ include(3rdparty/dxc)
+-include(3rdparty/directx)
++#include(3rdparty/directx)
+ include(3rdparty/vulkan)
+ include(3rdparty/spirv-cross)
+ 
